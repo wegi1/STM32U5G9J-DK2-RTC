@@ -90,17 +90,17 @@ void print_RTC(void){
 	sprintf(tekst, "%02d", mm);
 	render_text_monospace(396, 0, &tekst[0], digital_7_ttf, 230);
 
-	Seconds_print(ss);
 
 	my_date.WeekDay = calc_dow((int) (((century - 1) * 100) + my_date.Year)  , (int) my_date.Month , (int) my_date.Date );
 
 	if(ss == 0) { // update weekday field
-		if(hh == 0) { // between 00:00:00 and 00:00:07
+		if(hh == 0) { // between 00:00:00 and 00:07:00
 			if(mm < 8) {
 				clear_week_field();
 			} // END if(mm < 8)
-		} // END if(hh == 0) { // between 00:00:00 and 00:00:07
+		} // END if(hh == 0) { // between 00:00:00 and 00:07:00
 	} // END if(ss == 0) { // update weekday field
+	Seconds_print(ss);
 	lcd_text_boxed(190, 300, getDayofweek(my_date.WeekDay), SourceCodePro_Bold_ttf, 140);
 
 
@@ -143,7 +143,7 @@ int calc_dow(int y, int m,int d) {
 }
 //===================================================================================================================
 void clear_week_field(void){
-	BSP_LCD_FillRect(0, 555, 294, 244, 84, lcd_background_color);
+	BSP_LCD_FillRect(0, 190, 294, 610, 84, lcd_background_color);
 }
 //===================================================================================================================
 void stop_colon(void) {
